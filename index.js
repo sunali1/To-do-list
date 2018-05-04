@@ -2,7 +2,7 @@
 
 const express = require ('express');
 const app = express();
-const port = 6000
+const port = 3003
 
 const bodyParser = require("body-parser")
 
@@ -47,13 +47,6 @@ app.delete('/item/:id', (req, res) => {
     res.status(400).send()
   }
 })
-
-app.get('/wines', function(req, res) {
-    res.send([{name:'wine1'}, {name:'wine2'}]);
-});
-app.get('/wines/:id', function(req, res) {
-    res.send({id:req.params.id, name: "The Name", description: "description"});
-});
 
 app.get('/', (req, res) => {
   res.status(404).send('Not found')
