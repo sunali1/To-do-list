@@ -18,7 +18,7 @@ app.get('/items', (req, res) => {
 
 app.post('/item', (req, res) => {
   let addedItem = req.body.fruit
-  if(addedItem === undefined) {
+  if(addedItem === String) {
     res.status(400).send( 'Item not added' )
   }
   else {

@@ -20,3 +20,33 @@ describe('GET /items', () => {
     });
   });
 });
+
+// //Test the /POST route
+// describe('POST /item', () => {
+//   it('should not POST an item which is not of type string', done => {
+//     chai.request(server)
+//     .post('/item')
+//     .send(undefined)
+//     .end((err, res) => {
+//       res.should.have.status(400);
+//       // res.body.should.have.property('errors');
+//       res.body.should.be.eql('Item not added');
+//       done();
+//     });
+//   });
+// });
+
+describe('POST /item', () => {
+  it('should POST an item', done => {
+    let item = '{"fruit": "peach"}'
+    chai.request(server)
+    .post('/item')
+    .send(item)
+    .end((err, res) => {
+      res.should.have.status(201);
+      res.body.should.be.a('Object');
+      //res.body.should.be.eql("peach was added");
+      done();
+    });
+  });
+});
