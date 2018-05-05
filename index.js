@@ -44,14 +44,14 @@ app.get('/item/:id', (req, res) => {
 app.delete('/item/:id', (req, res) => {
   let removedItems = fakeData.splice((req.params.id), 1)
   if(removedItems.length > 0){
-    res.status(202).send(removedItems)
+    res.status(202).send(removedItems.toString())
   } else {
     res.status(400).send()
   }
 })
 
 app.get('/', (req, res) => {
-  res.status(404).send('Not found')
+  res.send('Your To-do-List')
 })
 
 app.listen(port, () => {

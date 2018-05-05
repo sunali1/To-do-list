@@ -7,6 +7,18 @@ const server = require('../index'); //??
 
 chai.use(chaiHttp); //For testing HTTP
 
+//Test the / route
+describe('/', () => {
+  it('should display a Welcome message', done => {
+    chai.request(server)
+    .get('/')
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.text.should.be.eql('Your To-do-List')
+      done();
+    });
+  });
+});
 //Test the /GET route
 describe('GET /items', () => {
   it('should GET all the items', done => {
@@ -48,17 +60,27 @@ describe('POST /item', () => {
     });
   });
 });
-
 //Test the /GET/:id route
 describe('GET /item/:id', () => {
   it('should GET an item by the given id', done => {
     chai.request(server)
     .get('/item/1')
     .end((err, res) => {
-      console.log(res)
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.text.should.be.eql('oranges');
+      done();
+    })
+  })
+});
+// Test the /DELETE/:id route
+describe('DELETE /item/:id', () => {
+  it('should DELETE an item by given id', done => {
+    chai.request(server)
+    .delete('/item/1')
+    .end((err, res) => {
+      res.should.have.status(202);
+      res.text.should.be.eql('oranges')
       done();
     })
   })
