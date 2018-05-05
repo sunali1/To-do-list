@@ -1,21 +1,19 @@
 'use strict';
 
-const express = require ('express');
-const app = express();
-const port = 3003
-
-const bodyParser = require("body-parser")
-
-let fakeData = ['apples', 'oranges', 'bananas']
-
+const express = require ('express'); // call express
+const app = express(); // define our app using express
+const port = process.env.PORT || 3003; // set our port
+let fakeData = ['apples', 'oranges', 'bananas'] //this a fakedata array which will soon be a database
 //middleware
+const bodyParser = require("body-parser"); // configure app to use bodyParser()
+// this will let us get the data from a POST
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
-
+// ROUTES FOR OUR API
+// =============================================================================
 app.get('/items', (req, res) => {
   res.send(fakeData)
 })
-
 
 app.post('/item', (req, res) => {
   let addedItem = req.body.fruit
@@ -39,8 +37,8 @@ app.get('/item/:id', (req, res) => {
   else {
     res.send(lookedItem)
   }
+});
 
-})
 app.delete('/item/:id', (req, res) => {
   let removedItems = fakeData.splice((req.params.id), 1)
   if(removedItems.length > 0){
@@ -53,7 +51,8 @@ app.delete('/item/:id', (req, res) => {
 app.get('/', (req, res) => {
   res.send('Your To-do-List')
 })
-
+// START THE SERVER
+// =============================================================================
 app.listen(port, () => {
   console.log(`Express is listening on ${port}` )
 });
