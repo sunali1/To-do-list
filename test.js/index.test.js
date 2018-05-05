@@ -21,25 +21,21 @@ describe('GET /items', () => {
   });
 });
 
-// //Test the /POST route
-// describe('POST /item', () => {
-//   it('should not POST an item which is not of type string', done => {
-//     chai.request(server)
-//     .post('/item')
-//     .send(undefined)
-//     .end((err, res) => {
-//       res.should.have.status(400);
-//       // res.body.should.have.property('errors');
-//       res.body.should.be.eql('Item not added');
-//       done();
-//     });
-//   });
-// });
-
-
-
+//Test the /POST route
 describe('POST /item', () => {
-  it('should POST an item', done => {
+
+  it('should not POST an item which is not of type string', done => {
+    chai.request(server)
+    .post('/item')
+    .send(undefined)
+    .end((err, res) => {
+      res.should.have.status(400)
+      res.text.should.be.eql('Item not added');
+      done();
+    });
+  });
+
+  it('should POST an item and add it to the fakeData', done => {
     let item = {"fruit": "peach"}
     chai.request(server)
     .post('/item')
@@ -47,7 +43,6 @@ describe('POST /item', () => {
     .end((err, res) => {
       res.should.have.status(201);
       res.body.should.be.a('Object');
-      console.log(res.text)
       res.text.should.be.eql(`peach was added`);
       done();
     });

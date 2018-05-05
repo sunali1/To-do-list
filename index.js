@@ -20,12 +20,12 @@ app.get('/items', (req, res) => {
 app.post('/item', (req, res) => {
   let addedItem = req.body.fruit
   console.log(addedItem)
-  if(addedItem === undefined) {
-    res.status(400).send( 'Item not added' )
-  }
-  else {
+  if(typeof addedItem === 'string') {
     fakeData.push(addedItem)
     console.log(fakeData)
+  }
+  else {
+    res.status(400).send( 'Item not added' )
   }
   res.status(201).send(`${addedItem} was added`)
 })
