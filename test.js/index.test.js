@@ -48,3 +48,18 @@ describe('POST /item', () => {
     });
   });
 });
+
+//Test the /GET/:id route
+describe('GET /item/:id', () => {
+  it('should GET an item by the given id', done => {
+    chai.request(server)
+    .get('/item/1')
+    .end((err, res) => {
+      console.log(res)
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
+      res.text.should.be.eql('oranges');
+      done();
+    })
+  })
+})
