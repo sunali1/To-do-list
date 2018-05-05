@@ -16,9 +16,11 @@ app.get('/items', (req, res) => {
   res.send(fakeData)
 })
 
+
 app.post('/item', (req, res) => {
   let addedItem = req.body.fruit
-  if(addedItem === String) {
+  console.log(addedItem)
+  if(addedItem === undefined) {
     res.status(400).send( 'Item not added' )
   }
   else {
@@ -28,9 +30,9 @@ app.post('/item', (req, res) => {
   res.status(201).send(`${addedItem} was added`)
 })
 
+
 app.get('/item/:id', (req, res) => {
   let lookedItem = fakeData[parseInt(req.params.id)] //to gaurd against params not being a number
-
   if(lookedItem === undefined) {
     res.status(400).send( 'Item not found' )
   }

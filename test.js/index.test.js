@@ -36,16 +36,19 @@ describe('GET /items', () => {
 //   });
 // });
 
+
+
 describe('POST /item', () => {
   it('should POST an item', done => {
-    let item = '{"fruit": "peach"}'
+    let item = {"fruit": "peach"}
     chai.request(server)
     .post('/item')
     .send(item)
     .end((err, res) => {
       res.should.have.status(201);
       res.body.should.be.a('Object');
-      //res.body.should.be.eql("peach was added");
+      console.log(res.text)
+      res.text.should.be.eql(`peach was added`);
       done();
     });
   });
