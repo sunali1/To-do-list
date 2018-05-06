@@ -20,10 +20,10 @@ describe('/', () => {
   });
 });
 //Test the /GET route
-describe('GET /items', () => {
-  it('should GET all the items', done => {
+describe('GET /tasks', () => {
+  it('should GET all the tasks', done => {
     chai.request(server)
-    .get('/items')
+    .get('/tasks')
     .end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('array');
@@ -34,11 +34,11 @@ describe('GET /items', () => {
 });
 
 //Test the /POST route
-describe('POST /item', () => {
+describe('POST /task', () => {
 
-  it('should not POST an item which is not of type string', done => {
+  it('should not POST an task which is not of type string', done => {
     chai.request(server)
-    .post('/item')
+    .post('/task')
     .send(undefined)
     .end((err, res) => {
       res.should.have.status(400)
@@ -47,11 +47,11 @@ describe('POST /item', () => {
     });
   });
 
-  it('should POST an item and add it to the fakeData', done => {
-    let item = {"fruit": "peach"}
+  it('should POST an task and add it to the fakeData', done => {
+    let task = {"fruit": "peach"}
     chai.request(server)
-    .post('/item')
-    .send(item)
+    .post('/task')
+    .send(task)
     .end((err, res) => {
       res.should.have.status(201);
       res.body.should.be.a('Object');
@@ -61,10 +61,10 @@ describe('POST /item', () => {
   });
 });
 //Test the /GET/:id route
-describe('GET /item/:id', () => {
-  it('should GET an item by the given id', done => {
+describe('GET /task/:id', () => {
+  it('should GET an task by the given id', done => {
     chai.request(server)
-    .get('/item/1')
+    .get('/task/1')
     .end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
@@ -73,11 +73,12 @@ describe('GET /item/:id', () => {
     })
   })
 });
+
 // Test the /DELETE/:id route
-describe('DELETE /item/:id', () => {
-  it('should DELETE an item by given id', done => {
+describe('DELETE /task/:id', () => {
+  it('should DELETE an task by given id', done => {
     chai.request(server)
-    .delete('/item/1')
+    .delete('/task/1')
     .end((err, res) => {
       res.should.have.status(202);
       res.text.should.be.eql('oranges')

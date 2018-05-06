@@ -11,11 +11,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 // ROUTES FOR OUR API
 // =============================================================================
-app.get('/items', (req, res) => {
+app.get('/tasks', (req, res) => {
   res.send(fakeData)
 })
 
-app.post('/item', (req, res) => {
+app.post('/task', (req, res) => {
   let addedItem = req.body.fruit
   console.log(addedItem)
   if(typeof addedItem === 'string') {
@@ -29,7 +29,7 @@ app.post('/item', (req, res) => {
 })
 
 
-app.get('/item/:id', (req, res) => {
+app.get('/task/:id', (req, res) => {
   let lookedItem = fakeData[parseInt(req.params.id)] //to gaurd against params not being a number
   if(lookedItem === undefined) {
     res.status(400).send( 'Item not found' )
@@ -39,7 +39,7 @@ app.get('/item/:id', (req, res) => {
   }
 });
 
-app.delete('/item/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   let removedItems = fakeData.splice((req.params.id), 1)
   if(removedItems.length > 0){
     res.status(202).send(removedItems.toString())

@@ -17,7 +17,7 @@ You will then be able to access it at localhost:6000
 
 ## Testing routes with  curl
 
-GET:      curl -D - localhost:6000/items
-GET:(:id)  curl -D - localhost:6000/item/1
+GET:      curl -D - localhost:6000/tasks
+GET:(:id)  curl -D - localhost:6000/task/1
 POST:   curl -i -X POST -H 'Content-Type: application/json' -d '{"fruit":"peach"}'
-DELETE: curl -D - -X DELETE localhost:6000/item/1
+DELETE: curl -D - -X DELETE localhost:6000/task/1
