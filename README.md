@@ -7,6 +7,12 @@ Clone this repo to your desktop and run `npm install` to install all the depende
 
 <!-- You might want to look into config.json to make changes to the port you want to use. -->
 
+## dependencies
+
+morgan: HTTP request logger middleware for node.js
+mongoose: is a MongoDB object modeling tool designed to work in an asynchronous environment.
+bodu-parser: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+
 ## Usage
 After you clone this repo to your desktop, go to its root directory and run `npm install` to install its dependencies.
 
