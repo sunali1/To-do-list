@@ -2,11 +2,22 @@
 
 const express = require ('express'); // call express
 const app = express(); // define our app using express
-const port = process.env.PORT || 3003; // set our port
 let fakeData = ['apples', 'oranges', 'bananas'] //this a fakedata array which will soon be a database
 //middleware
-const bodyParser = require("body-parser"); // configure app to use bodyParser()
-// this will let us get the data from a POST
+const bodyParser = require("body-parser"); // configure app to use bodyParser(); this will let us get the data from a POST
+const logger = require('morgan');
+const task = require('./node-server/models/task')
+
+const config = require ('./config') // load databse and host port and env config
+const mongoose = require('mongoose');
+//db connection
+mongoose.connect('mongodb://localhost:27017/todo_test')
+mongoose.connection.on('error', err => {
+  if (err) throw err;
+   console.log('Successfully connected');
+});
+
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 // ROUTES FOR OUR API
@@ -53,7 +64,7 @@ app.get('/', (req, res) => {
 })
 // START THE SERVER
 // =============================================================================
-app.listen(port, () => {
-  console.log(`Express is listening on ${port}` )
+app.listen(config.port, config.host, () => {
+  console.log(`Express is listening port, ${config.port}` )
 });
-module.exports = app;
+module.exports = app; //for testing
