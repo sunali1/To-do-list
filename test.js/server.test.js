@@ -62,26 +62,26 @@ describe('/POST task', () => {
       done();
     });
   });
-  // it('should POST a task and add it to the database', (done) => {
-  //   const task = {
-  //                 detail: "Call Elon in the morning",
-  //                 completed: 'No'
-  //               }
-  //   chai.request(server)
-  //   .post('/task')
-  //   .send(task)
-  //   .end((err, res) => {
-  //     console.log('TASK', task)
-  //     console.log('RES', res)
-  //     //console.log(res.body);
-  //     res.should.have.status(201);
-  //     res.body.should.be.a('Object');
-  //     res.should.have.property(message).eql('Task successfully added!');
-  //     //res.body.should.have.property('detail');
-  //     //res.body.should.have.property('completed');
-  //     done();
-  //   });
-  // });
+  it('should POST a task and add it to the database', (done) => {
+    const task = {
+                  detail: "Call Elon in the morning",
+                  completed: false
+                }
+    chai.request(server)
+    .post('/task')
+    .send(task)
+    .end((err, res) => {
+      console.log('TASK', task)
+      console.log('RES', res)
+      //console.log(res.body);
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
+      res.body.should.have.property('message').eql('Task successfully added!');
+      res.body.task.should.have.property('detail');
+      res.body.task.should.have.property('completed');
+      done();
+    });
+  });
 });
 // describe('/GET/:id task', () => {
 //   it('should GET a task from the database by a given id', (done) => {
