@@ -11,11 +11,15 @@ const task = require('./node-server/routes/task')
 const config = require ('./config') // load databse and host port and env config
 const mongoose = require('mongoose');
 //db connection
-mongoose.connect('mongodb://localhost:27017/todo_test')
+mongoose.connect('mongodb://localhost:27017/tasks_test')
 mongoose.connection.on('error', err => {
-  if (err) throw err;
-   console.log('Successfully connected');
+  if (err) {
+    console.log('err', err)
+  } else {
+    console.log('Successfully connected', db);
+    }
 });
+
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -23,48 +27,11 @@ app.use(bodyParser.json())
 // ROUTES FOR OUR API
 // =============================================================================
 app.get('/', (req, res) => res.json({message: "Here's your task list!"}))
-app.route('/tasks')
-    .get(task.getTasks);
-
-// app.get('/', (req, res) => {
-//   res.send('Your To-do-List')
-// })
-// app.get('/tasks', (req, res) => {
-//   res.send(fakeData)
-// })
-
-// app.post('/task', (req, res) => {
-//   let addedItem = req.body.fruit
-//   console.log(addedItem)
-//   if(typeof addedItem === 'string') {
-//     fakeData.push(addedItem)
-//     console.log(fakeData)
-//   }
-//   else {
-//     res.status(400).send( 'Item not added' )
-//   }
-//   res.status(201).send(`${addedItem} was added`)
-// })
-//
-//
-// app.get('/task/:id', (req, res) => {
-//   let lookedItem = fakeData[parseInt(req.params.id)] //to gaurd against params not being a number
-//   if(lookedItem === undefined) {
-//     res.status(400).send( 'Item not found' )
-//   }
-//   else {
-//     res.send(lookedItem)
-//   }
-// });
-//
-// app.delete('/task/:id', (req, res) => {
-//   let removedItems = fakeData.splice((req.params.id), 1)
-//   if(removedItems.length > 0){
-//     res.status(202).send(removedItems.toString())
-//   } else {
-//     res.status(400).send()
-//   }
-// })
+app.route('/task')
+    .get(task.getTasks) //all tasks
+    .post(task.postTask);
+// app.route('/task')
+//     .get(task.getTask) //one task by id
 
 
 // START THE SERVER
