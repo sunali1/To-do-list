@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let Task = require('../models/task');
 
-// GET /tasks route to retrieve all the tasks
+// GET /task route to retrieve all the tasks
 function getTasks(req, res) {
   //query the db and if no errors, send all tasks
   let query = Task.find({});
@@ -24,13 +24,24 @@ function postTask(req, res) {
   });
 };
 // GET /task route to retrieve one task from the database by given id
-// function getTask(req, res) {
-//   Task.findById(req.params.id, (err, task) => {
-//     if(err)
-//     res.send(err)
-//
-//     res.json(task)
-//   })
-// }
+function getTask(req, res) {
+  Task.findById(req.params.id, (err, task) => {
+    if(err){
+      res.send(err)
+    } else {
+      res.json(task)
+    };
+  });
+};
+// PUT /task route to update one task given its :id
+function updateTask(req, res) {
+  Task.findById(req.params.id, (err, task) => {
+    if(err) res.send(err);
+    Object.assign(task, req.body).save((err, task) => {
+      if (err) res.send(err);
+      res.json({ message: 'Task successfully updated!', task });
+    });
+  });
+};
 //export all functions
-module.exports = { getTasks, postTask }
+module.exports = { getTasks, postTask, getTask, updateTask }

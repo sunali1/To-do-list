@@ -30,8 +30,9 @@ app.get('/', (req, res) => res.json({message: "Here's your task list!"}))
 app.route('/task')
     .get(task.getTasks) //all tasks
     .post(task.postTask);
-// app.route('/task')
-//     .get(task.getTask) //one task by id
+app.route('/task/:id')
+    .get(task.getTask) //one task by id
+    .put(task.updateTask)
 
 
 // START THE SERVER

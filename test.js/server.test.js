@@ -7,9 +7,7 @@ const Task = require('../node-server/models/task');
 const chai = require ('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
-const server = require('../server'); //??
-//console.log('DB1', mongoose.connection)
-//console.log('DB', mongoose.connection.readyState) // to check state of connection to the database
+const server = require('../server');
 
 chai.use(chaiHttp); //For testing HTTP
 
@@ -25,7 +23,6 @@ describe('Tasks', () => {
       chai.request(server)
       .get('/')
       .end((err, res) => {
-        console.log(res.body.message);
         res.should.have.status(200);
         res.body.should.have.property('message').eql('Here\'s your task list!');
         done();
@@ -58,12 +55,11 @@ describe('/POST task', () => {
       res.body.should.have.property("errors");
       res.body.errors.should.have.property('detail');
       res.body.errors.detail.should.have.property('kind').eql('required');
-      // console.log(res.body.errors.detail);
       done();
     });
   });
   it('should POST a task and add it to the database', (done) => {
-    const task = {
+    let task = {
                   detail: "Call Elon in the morning",
                   completed: false
                 }
@@ -71,9 +67,6 @@ describe('/POST task', () => {
     .post('/task')
     .send(task)
     .end((err, res) => {
-      console.log('TASK', task)
-      console.log('RES', res)
-      //console.log(res.body);
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('message').eql('Task successfully added!');
@@ -83,18 +76,37 @@ describe('/POST task', () => {
     });
   });
 });
-// describe('/GET/:id task', () => {
-//   it('should GET a task from the database by a given id', (done) => {
-//     let task = new Task({ detail: "Call Elon in the morning", completed: 'No' });
-//     task.save((err, task ) => {
-//       console.log('SAVED TASK', task)
-//       chai.request(server)
-//       .get('/task' + task.id)
-//       .send(task)
-//       .end((err, res) => {
-//         res.should.have.status(200);
-//         res.body.should.have.property('detail');
-//       });
-//     });
-//   });
-// });
+describe('/GET/:id task', () => {
+  it('should GET a task from the database by a given id', (done) => {
+    let task = new Task({ detail: "Prepare for TED talk", completed: false });
+    task.save((err, task ) => {
+      chai.request(server)
+      .get('/task/' + task.id)
+      .send(task)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('detail');
+        res.body.should.have.property('completed');
+        res.body.should.have.property('_id');
+        done();
+      });
+    });
+  });
+});
+describe('/PUT/:id task', () => {
+  it('should UPDATE a task given the id', (done) => {
+    let task = new Task({ detail: "Sell one bitcoin", completed: false });
+    task.save((err, task) => {
+      chai.request(server)
+      .put('/task/' + task.id)
+      .send({detail: 'Sell two bitcoins', completed: false})
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('Object');
+        res.body.task.should.have.property('detail').eql("Sell two bitcoins");
+        res.body.task.should.have.property('completed').eql(false);
+        done();
+      });
+    });
+  });
+});
