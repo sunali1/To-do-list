@@ -1,7 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-/hoist-examples
-/var-loop-example
+/hoist-example.js
+/var-loop-example.js
 
 # dependencies
 /node_modules

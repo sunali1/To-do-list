@@ -33,7 +33,7 @@ function getTask(req, res) {
     };
   });
 };
-// UPDATE /task route to update one task given its :id
+// PUT /task route to update one task given its :id
 function updateTask(req, res) {
   Task.findById(req.params.id, (err, task) => {
     if(err) res.send(err);

@@ -4,7 +4,7 @@
   "description": "A To do list",
   "main": "server.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && node server.js",
+    "start": "set NODE_ENV=development && node server.js",
     "test": "mocha"
   },
   "author": "",
