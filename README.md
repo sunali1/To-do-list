@@ -6,27 +6,28 @@ This is a Node.js ReactJs application powered by Express using MongoDB database.
 
 ## Pre-requisites
 
-node 9.5
+node 9.5 (available https://nodejs.org/en/ or via https://github.com/creationix/nvm)
 MongoDB shell version v3.6.3
 
 
 ## Setup
 Clone the repository:
 
-    `git clone https://github.com/sunali1/To-do-list.git
+    git clone https://github.com/sunali1/To-do-list.git
     cd ./To-do-list`
 
 Install the dependencies:
 
-    `npm install`
+    npm install
 
 
 Open 3 further tabs in terminal and in each
-    `mongo` for mongodb database
 
-    `mongod` for mongoose
+    mongo for mongodb database
 
-    run `nodemon` to start the server and `Ctrl C` to stop
+    mongod for mongoose
+
+    run nodemon to start the server and `Ctrl C` to stop
 
 You will then be able to access it in your browser at localhost:3003
 
@@ -34,14 +35,14 @@ You will then be able to access it in your browser at localhost:3003
 
 ## Dependencies
 
-express: Web application framework for nodejs
-morgan: HTTP request logger middleware for node.js
-mongoose: is a MongoDB object modeling tool designed to work in an asynchronous environment.
-body-parser: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
-mocha: test framework
-chai: assertion library for testing
-chaiHttp: integration testing
-nodemon: server restarts automatically after file changes
+* express: Web application framework for nodejs
+* morgan: HTTP request logger middleware for node.js
+* mongoose: is a MongoDB object modeling tool designed to work in an asynchronous environment.
+* body-parser: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+* mocha: test framework
+* chai: assertion library for testing
+* chaiHttp: integration testing
+* nodemon: server restarts automatically after file changes
 
 ## Tests
 
@@ -58,10 +59,10 @@ nodemon: server restarts automatically after file changes
 
 ### Testing routes with  curl
 
-GET:      curl -D - localhost:3003/task
-GET:(:id)  curl -D - localhost:3003/task/1
-POST:   curl -i -X POST -H 'Content-Type: application/json' -d '{"deatil":"Milk", "completed": false}'
-DELETE: curl -D - -X DELETE localhost:6000/task/1
+* GET:      curl -D - localhost:3003/task
+* GET:(:id)  curl -D - localhost:3003/task/1
+* POST:   curl -i -X POST -H 'Content-Type: application/json' -d '{"deatil":"Milk", "completed": false}'
+* DELETE: curl -D - -X DELETE localhost:6000/task/1
 
 ## Conclusion
 This project was useful to learn the full stack approach to creating an TDD web application. I have a good understanding of MongoDB and Node backend API
