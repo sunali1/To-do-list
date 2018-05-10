@@ -1,0 +1,19 @@
+{
+  "name": "client-react",
+  "version": "1.0.0",
+  "description": "A To Do List frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunali1/To-do-list.git"
+  },
+  "author": "Sunali Seth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunali1/To-do-list/issues"
+  },
+  "homepage": "https://github.com/sunali1/To-do-list#readme"
+}
