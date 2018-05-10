@@ -33,15 +33,22 @@ function getTask(req, res) {
     };
   });
 };
-// PUT /task route to update one task given its :id
+// UPDATE /task route to update one task given its :id
 function updateTask(req, res) {
   Task.findById(req.params.id, (err, task) => {
     if(err) res.send(err);
-    Object.assign(task, req.body).save((err, task) => {
+    Object.assign(task, req.body).save((err, task) => { //Object.assign new function in ES6
       if (err) res.send(err);
       res.json({ message: 'Task successfully updated!', task });
     });
   });
 };
+// DELETE /task route to delete one task given its :id
+function deleteTask(req, res) {
+  Task.remove({ _id: req.params.id }, (err, result) => {
+    if(err) res.send(err);
+    res.json({ message: 'Task successfully deleted!', result });
+  })
+};
 //export all functions
-module.exports = { getTasks, postTask, getTask, updateTask }
+module.exports = { getTasks, postTask, getTask, updateTask, deleteTask }

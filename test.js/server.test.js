@@ -110,3 +110,17 @@ describe('/PUT/:id task', () => {
     });
   });
 });
+describe('/DELETE/:id task', () => {
+  it('should DELETE a task given the id', (done) => {
+    let task = new Task ({ detail: "Gardening", completed: false });
+    task.save((err, task) => {
+      chai.request(server)
+      .delete('/task/' + task.id)
+      .end((err, res) => {
+        res.should.have.status(200);
+        console.log(res.body);
+        done();
+      })
+    })
+  })
+})

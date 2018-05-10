@@ -33,6 +33,7 @@ app.route('/task')
 app.route('/task/:id')
     .get(task.getTask) //one task by id
     .put(task.updateTask)
+    .delete(task.deleteTask)
 
 
 // START THE SERVER
