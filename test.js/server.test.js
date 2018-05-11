@@ -118,6 +118,9 @@ describe('/DELETE/:id task', () => {
       .delete('/task/' + task.id)
       .end((err, res) => {
         res.should.have.status(200);
+        res.body.should.have.property('message').eql('Task successfully deleted!');
+        res.body.result.should.have.property('ok').eql(1);
+        res.body.result.should.have.property('n').eql(1);
         console.log(res.body);
         done();
       })

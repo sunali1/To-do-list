@@ -1,11 +1,11 @@
 {
-  "name": "To-do-list",
+  "name": "node-server",
   "version": "1.0.0",
   "description": "A To do list",
   "main": "server.js",
   "scripts": {
     "start": "set NODE_ENV=development && node server.js",
-    "test": "mocha"
+    "test": "mocha ./test"
   },
   "author": "",
   "license": "ISC",
