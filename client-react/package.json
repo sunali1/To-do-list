@@ -4,7 +4,9 @@
   "description": "A To Do List frontend",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "start": "webpack-dev-server --mode development",
+    "test": "jest",
+    "build": "webpack --mode developement"
   },
   "repository": {
     "type": "git",
